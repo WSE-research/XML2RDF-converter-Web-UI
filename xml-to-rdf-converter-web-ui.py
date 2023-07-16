@@ -45,7 +45,7 @@ result_label = 'What is the format of the output data?'
 result_key = "output_format_select"
 
 
-def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, prefix):
+def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, prefix, accept_mime_type):
     request_url = SERVICE_ENDPOINT + "xml2rdf"
     
     payload = {
@@ -57,9 +57,16 @@ def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, pre
     if prefix != None:
         payload['prefix'] = prefix
     
-    results = requests.post(request_url, json=payload, verify=False)
+    headers = {
+        "Accept": accept_mime_type
+    }
+    
+    results = requests.post(request_url, json=payload, verify=False, headers=headers)
 
     logging.info("================================= ")
+    logging.info("request_url: " + request_url)
+    logging.info("headers: ")
+    logging.info(pprint.pformat(headers, indent=2))
     logging.info("payload: ")    
     logging.info(json.dumps(payload, indent=2))
     logging.info("results: ")    
@@ -85,7 +92,26 @@ with st.sidebar:
             """,
             unsafe_allow_html=True,
         )
-        
+    
+    output_format_key = st.sidebar.selectbox("Output format", ["RDF Turtle", "RDF XML", "JSON-LD"], index=0)
+    output_format = {
+        "RDF Turtle": {
+            "mime_type": "text/turtle",
+            "file_extension": "ttl",
+            "code_highlight": "turtle"
+        },
+        "RDF XML": {
+            "mime_type": "application/rdf+xml",
+            "file_extension": "xml",
+            "code_highlight": "xml"            
+        },
+        "JSON-LD": {
+            "mime_type": "application/ld+json",
+            "file_extension": "json",
+            "code_highlight": "json"
+        }
+    }.get(output_format_key)
+    
     label = "Define the language tag for string literals in the XML files"
     st.sidebar.markdown("""
         ### Parameters
@@ -173,8 +199,8 @@ else:
             stringio = StringIO(uploaded_xml_file.getvalue().decode("utf-8"))
             plain_xml_data = stringio.read()
             number_of_lines = len(plain_xml_data.splitlines())
-            result = post_xml_and_dtd_to_server(plain_xml_data, uploaded_dtd_file_contents, language, prefix)
-            rdf_filename = '.'.join(uploaded_xml_file.name.split(".")[:-1]) + ".ttl"
+            result = post_xml_and_dtd_to_server(plain_xml_data, uploaded_dtd_file_contents, language, prefix, output_format.get("mime_type"))
+            rdf_filename = '.'.join(uploaded_xml_file.name.split(".")[:-1]) + "." + output_format.get("file_extension")
             
             if result.status_code == 200 and result is not None and result.text is not None:
                 processing_ok = True
@@ -189,22 +215,18 @@ else:
             expander_label_xml = f"uploaded {uploaded_xml_file.name} ({number_of_lines} lines)"
             with st.expander(expander_label_xml, expanded=False):
                 st.code(plain_xml_data, language='xml')    
-                #else:
-                #    st.error("Could not transform XML file " + uploaded_xml_file.name + " with DTD file " + uploaded_dtd_file.name + ".")
-                #    st.code(result, language='json')
-                #st.code(result, language='xml')
 
             number_of_lines = len(result.text.splitlines())            
             expander_label_rdf = f"transformed {rdf_filename} ({number_of_lines} lines)"
             if processing_ok is True:
                 with st.expander(expander_label_rdf, expanded=False):
-                    st.code(result.text, language='turtle')
+                    st.code(result.text, language=output_format.get("code_highlight"))
 
                 st.download_button(
-                    label="Download data as RDF Turtle file '{}'".format(rdf_filename),
+                    label="Download data as {} file '{}'".format(output_format_key, rdf_filename),
                     data=result.text,
                     file_name=rdf_filename,
-                    mime='text/turtle',
+                    mime=output_format.get("mime_type"),
                     key="download" + str(counter)
                 )
                 counter += 1
