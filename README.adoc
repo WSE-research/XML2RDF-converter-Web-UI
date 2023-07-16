@@ -1,0 +1,33 @@
+= DTD2RDFConverter-Web-UI
+
+Frontend for XML to RDF conversion using https://github.com/WSE-research/DTD2RDFConverter
+
+== Installation and running
+
+=== Python 
+
+```bash
+pip install -r requirements.txt
+```
+
+```bash
+streamlit run --server.port=8501 xml-to-rdf-converter-web-ui.py
+```
+
+
+
+=== Docker
+
+==== Build the Docker image
+
+```bash
+docker build -t xml-to-rdf-converter-web-ui:latest .
+```
+
+==== Run the Docker image
+
+```bash
+docker run -p 8501:8501 --name xml-to-rdf-converter-web-ui xml-to-rdf-converter-web-ui:latest
+```
+
+Thereafter, the application will be available at http://localhost:8501 in your browser if you are running Docker locally.

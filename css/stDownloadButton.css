@@ -1,0 +1,13 @@
+.main div.stDownloadButton>button {
+    border-color: #4186f7;
+    color: #4186f7;
+}
+
+.main div.stDownloadButton button p {
+    font-weight: bold;
+}
+
+.main div.stDownloadButton button p::before {
+    font-weight: bold;
+    content: "🗎 ";
+}
