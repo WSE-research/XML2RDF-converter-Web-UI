@@ -20,8 +20,16 @@ endif::[]
 
 = Web Frontend for XML2RDF converter using XML DTD files
 
-Frontend for XML to RDF conversion using the https://github.com/WSE-research/DTD2RDFConverter[DTD2RDFConverter web service].
-The UI was implemented using Python 3 and https://streamlit.io/[Streamlit].
+If you want to translate XML data to RDF data, you come to the right place.
+This **Web UI** provides a **fast and automated** way of interactively converting XML data to RDF data. 
+It is a frontend providing XML to RDF conversion using the https://github.com/WSE-research/DTD2RDFConverter[DTD2RDFConverter web service].
+Alternative approaches require manual mappings between the XML and RDF data, which is time-consuming and error-prone. 
+In contrast, this tool uses the corresponding Document Type Definition (DTD) to automatically generate the RDF data (i.e., the structure of the RDF properties is derived from the DTD file).
+However, please note that due to the nature of the implemented approach, our automated process has no capabilities for changing the structure of the generated RDF data.
+Instead, the generated RDF data is a direct representation of the XML data.
+Concluding, this Web UI can be used for **straight-forward conversion of XML to RDF** if DTDs are available.
+
+The UI was implemented using https://www.python.org/[Python] and https://streamlit.io/[Streamlit].
 
 ++++
 <img align="right" role="right" width="50%" src="https://github.com/WSE-research/DTD2RDFConverter-Web-UI/blob/main/images/XML-to-RDF-using-DTD-screenshot.png?raw=true"/>
@@ -55,7 +63,7 @@ streamlit run --server.port=8501 xml-to-rdf-converter-web-ui.py
 
 Thereafter, the Streamlit application will be available at http://localhost:8501 in your browser if you are running Python on your local machine.
 
-=== Docker
+=== Docker locally
 
 ==== Build the Docker image
 
@@ -70,6 +78,20 @@ docker run -p 8501:8501 --name xml-to-rdf-converter-web-ui xml-to-rdf-converter-
 ```
 
 Thereafter, the application will be available at http://localhost:8501 in your browser if you are running Docker locally.
+
+=== Docker image from Dockerhub
+
+==== Pull the prepared Docker image
+
+```bash
+docker pull wseresearch/xml-to-rdf-converter-web-ui:latest
+```
+
+==== Run the prepared Docker image
+
+```bash
+docker run -p 8501:8501 --name xml-to-rdf-converter-web-ui wseresearch/xml-to-rdf-converter-web-ui:latest
+```
 
 == Configuration
 
