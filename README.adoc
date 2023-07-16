@@ -41,7 +41,7 @@ toc::[]
 
 == Demo
 
-The online demo is available at http://demos.swe.htwk-leipzig.de:40181/.
+The online demo is available at https://demos.swe.htwk-leipzig.de/xml-to-rdf-converter-web-ui/.
 
 == Installation and running
 
