@@ -36,15 +36,6 @@ st.set_page_config(layout="wide", initial_sidebar_state="expanded",
 )
 include_css(st, ["css/stFileUploadDropzone.css", "css/style_github_ribbon.css", "css/style_menu_logo.css", "css/stDownloadButton.css"])
 
-input_head_text = "Original RDF data"
-input_label = 'What is the format of the input data?'
-input_key = "input_format_select"
-
-result_head_text = "Formatted RDF data"
-result_label = 'What is the format of the output data?'
-result_key = "output_format_select"
-
-
 def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, prefix, accept_mime_type):
     request_url = SERVICE_ENDPOINT + "xml2rdf"
     
@@ -93,7 +84,11 @@ with st.sidebar:
             unsafe_allow_html=True,
         )
     
-    output_format_key = st.sidebar.selectbox("Output format", ["RDF Turtle", "RDF XML", "JSON-LD"], index=0)
+    st.sidebar.markdown("### Parameters")
+    
+    label = "Define the output format of the generated RDF data"
+    st.sidebar.markdown("#### {}".format(label))
+    output_format_key = st.sidebar.selectbox(label=label, options=["RDF Turtle", "RDF XML", "JSON-LD"], index=0, label_visibility="collapsed")
     output_format = {
         "RDF Turtle": {
             "mime_type": "text/turtle",
@@ -113,14 +108,10 @@ with st.sidebar:
     }.get(output_format_key)
     
     label = "Define the language tag for string literals in the XML files"
-    st.sidebar.markdown("""
-        ### Parameters
-        
-        #### {}
-    """.format(label))
+    st.sidebar.markdown("#### {}".format(label))
     language = st.sidebar.text_input(label=label, value="en", max_chars=5, label_visibility="collapsed")
     
-    label = "Prefix for the generated URIs of the RDF file"
+    label = "Prefix for the generated URIs of the RDF data"
     st.sidebar.markdown("""
         #### {}
     """.format(label))

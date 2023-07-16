@@ -31,6 +31,8 @@ toc::[]
 
 The online demo is available at http://demos.swe.htwk-leipzig.de:40181/.
 
+image::images/XML-to-RDF-using-DTD-screenshot.png[alt="Screenshot of the XML-to-RDF converter web frontend",width=50%,align=right]
+
 == Installation and running
 
 === Python 
