@@ -8,6 +8,8 @@ ifdef::env-github[]
 :important-caption: :heavy_exclamation_mark:
 :caution-caption: :fire:
 :warning-caption: :warning:
+:github-repository: https://github.com/WSE-research/DTD2RDFConverter-Web-UI
+
 endif::[]
 
 ++++
@@ -16,13 +18,18 @@ endif::[]
 </a>
 ++++
 
-= DTD2RDFConverter-Web-UI
+= Web Frontend for XML2RDF converter using XML DTD files
 
-Frontend for XML to RDF conversion using the DTD2RDFConverter web service (cf. https://github.com/WSE-research/DTD2RDFConverter).
+Frontend for XML to RDF conversion using the https://github.com/WSE-research/DTD2RDFConverter[DTD2RDFConverter web service].
+The UI was implemented using Python 3 and https://streamlit.io/[Streamlit].
 
 ---
 toc::[]
 ---
+
+== Demo
+
+The online demo is available at http://demos.swe.htwk-leipzig.de:40181/.
 
 == Installation and running
 
@@ -69,8 +76,8 @@ If you want to change the configuration parameters, then you might change the va
 == Contribute
 
 We are happy to receive your contributions. 
-Please create a pull request or an https://github.com/WSE-research/RDF-data-converter-and-beautifier/issues/new[issue].
-As this tool is published under the https://github.com/WSE-research/RDF-data-converter-and-beautifier/blob/main/LICENSE[MIT license], feel free to https://github.com/WSE-research/RDF-data-converter-and-beautifier/fork[fork] it and use it in your own projects.
+Please create a pull request or an {github-repository}/issues/new[issue].
+As this tool is published under the {github-repository}/blob/main/LICENSE[MIT license], feel free to {github-repository}/fork[fork] it and use it in your own projects.
 
 == Disclaimer
 
