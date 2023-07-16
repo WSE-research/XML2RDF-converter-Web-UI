@@ -23,6 +23,10 @@ endif::[]
 Frontend for XML to RDF conversion using the https://github.com/WSE-research/DTD2RDFConverter[DTD2RDFConverter web service].
 The UI was implemented using Python 3 and https://streamlit.io/[Streamlit].
 
+++++
+<img align="right" role="right" width="50%" src="https://github.com/WSE-research/DTD2RDFConverter-Web-UI/blob/main/images/XML-to-RDF-using-DTD-screenshot.png?raw=true"/>
+++++
+
 ---
 toc::[]
 ---
@@ -30,8 +34,6 @@ toc::[]
 == Demo
 
 The online demo is available at http://demos.swe.htwk-leipzig.de:40181/.
-
-image::images/XML-to-RDF-using-DTD-screenshot.png[alt="Screenshot of the XML-to-RDF converter web frontend",width=50%,align=right]
 
 == Installation and running
 
