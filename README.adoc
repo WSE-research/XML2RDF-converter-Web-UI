@@ -81,6 +81,8 @@ Thereafter, the application will be available at http://localhost:8501 in your b
 
 === Docker image from Dockerhub
 
+The https://github.com/WSE-research/DTD2RDFConverter-Web-UI/releases[releases] of this tool are https://hub.docker.com/r/wseresearch/xml-to-rdf-converter-web-ui/tags[available as Docker images on Dockerhub].
+
 ==== Pull the prepared Docker image
 
 ```bash
