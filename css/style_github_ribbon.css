@@ -136,3 +136,7 @@
 .github-fork-ribbon:hover::before {
     background-color: #eb4134;
 }
+
+div[data-testid="toastContainer"] {
+    z-index: 100000;
+}
