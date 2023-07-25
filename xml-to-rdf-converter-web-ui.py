@@ -9,6 +9,8 @@ import logging
 import requests
 import pprint
 from util import include_css
+from datetime import datetime
+import time
 
 from decouple import config
 
@@ -36,8 +38,15 @@ st.set_page_config(layout="wide", initial_sidebar_state="expanded",
 )
 include_css(st, ["css/stFileUploadDropzone.css", "css/style_github_ribbon.css", "css/style_menu_logo.css", "css/stDownloadButton.css"])
 
+
+@st.cache_data
+def post_request_to_server(request_url, payload, headers):
+    return requests.post(request_url, json=payload, verify=False, headers=headers)
+
 def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, prefix, accept_mime_type):
     request_url = SERVICE_ENDPOINT + "xml2rdf"
+    start = datetime.now()
+    st.toast("Send request to web service at " + request_url, icon="☕")
     
     payload = {
         'xml': xml_file_content, 
@@ -52,7 +61,12 @@ def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, pre
         "Accept": accept_mime_type
     }
     
-    results = requests.post(request_url, json=payload, verify=False, headers=headers)
+    response = post_request_to_server(request_url, payload, headers)
+    
+    time_delta = round((datetime.now() - start).total_seconds(), 2)
+    if response.status_code == 200:
+        time.sleep(0.5)
+        st.toast("Request to [web service]({}) **successfully finished** after {} sec.".format(request_url, str(time_delta)), icon="✅")
 
     logging.info("================================= ")
     logging.info("request_url: " + request_url)
@@ -61,11 +75,11 @@ def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, pre
     logging.info("payload: ")    
     logging.info(json.dumps(payload, indent=2))
     logging.info("results: ")    
-    logging.info(pprint.pformat(results))
-    logging.info(pprint.pformat(results.text))
+    logging.info(pprint.pformat(response))
+    logging.info(pprint.pformat(response.text))
     logging.info("================================= ")
     
-    return results
+    return response
 
 @st.cache_data
 def download_examples_from_github(url):
@@ -221,6 +235,8 @@ else:
                     key="download" + str(counter)
                 )
                 counter += 1
+            else:
+                st.error("##### " + processing_text + "\n\n" + str(result) + "\n\n" + result.text)
         else:
             st.error("Uploaded file " + uploaded_xml_file.name + " is not an XML file.")
     
