@@ -11,7 +11,6 @@ import pprint
 from util import include_css
 from datetime import datetime
 import time
-
 from decouple import config
 
 SERVICE_ENDPOINT = config('SERVICE_ENDPOINT')
@@ -44,7 +43,7 @@ def post_request_to_server(request_url, payload, headers):
     return requests.post(request_url, json=payload, verify=False, headers=headers)
 
 def post_xml_and_dtd_to_server(xml_file_content, dtd_file_content, language, prefix, accept_mime_type):
-    request_url = SERVICE_ENDPOINT + "xml2rdf"
+    request_url = SERVICE_ENDPOINT 
     start = datetime.now()
     st.toast("Send request to web service at " + request_url, icon="☕")
     
@@ -153,10 +152,13 @@ with st.sidebar:
     )
         
     st.sidebar.markdown("""----""")
-    st.sidebar.subheader("Visualization")
+    st.sidebar.subheader("Basic Configuration")
     agree_on_showing_additional_information = not st.checkbox(
         'minimize layout', value=(not agree_on_showing_additional_information))
 
+    label = "Define the service endpoint:"
+    st.sidebar.markdown("{}".format(label))
+    SERVICE_ENDPOINT = st.sidebar.text_input(label=label, value=SERVICE_ENDPOINT, key="service_endpoint", label_visibility="collapsed")
 
 # introduce the tool
 page_header = """### XML to RDF converter by using the corresponding DTD file
