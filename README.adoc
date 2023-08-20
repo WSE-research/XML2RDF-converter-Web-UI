@@ -8,13 +8,13 @@ ifdef::env-github[]
 :important-caption: :heavy_exclamation_mark:
 :caution-caption: :fire:
 :warning-caption: :warning:
-:github-repository: https://github.com/WSE-research/DTD2RDFConverter-Web-UI
+:github-repository: https://github.com/WSE-research/XML2RDF-converter-Web-UI
 
 endif::[]
 
 ++++
 <a href="https://github.com/search?q=topic%3AXML-to-RDF+org%3AWSE-research&type=Repositories" title="see all our XML-to-RDF repositories">
-<img align="right" role="right" height="96" src="https://github.com/WSE-research/DTD2RDFConverter-Web-UI/blob/main/images/XML-to-RDF-using-DTD.png?raw=true"/>
+<img align="right" role="right" height="96" src="https://github.com/WSE-research/XML2RDF-converter-Web-UI/blob/main/images/XML-to-RDF-using-DTD.png?raw=true"/>
 </a>
 ++++
 
@@ -22,7 +22,7 @@ endif::[]
 
 If you want to translate XML data to RDF data, you come to the right place.
 This **Web UI** provides a **fast and automated** way of interactively converting XML data to RDF data. 
-It is a frontend providing XML to RDF conversion using the https://github.com/WSE-research/DTD2RDFConverter[DTD2RDFConverter web service].
+It is a frontend providing XML to RDF conversion using the https://github.com/WSE-research/XML2RDF-converter[XML2RDF-converter web service].
 Alternative approaches require manual mappings between the XML and RDF data, which is time-consuming and error-prone. 
 In contrast, this tool uses the corresponding Document Type Definition (DTD) to automatically generate the RDF data (i.e., the structure of the RDF properties is derived from the DTD file).
 However, please note that due to the nature of the implemented approach, our automated process has no capabilities for changing the structure of the generated RDF data.
@@ -32,7 +32,7 @@ Concluding, this Web UI can be used for **straight-forward conversion of XML to 
 The UI was implemented using https://www.python.org/[Python] and https://streamlit.io/[Streamlit].
 
 ++++
-<img align="right" role="right" width="50%" src="https://github.com/WSE-research/DTD2RDFConverter-Web-UI/blob/main/images/XML-to-RDF-using-DTD-screenshot.png?raw=true"/>
+<img align="right" role="right" width="50%" src="https://github.com/WSE-research/XML2RDF-converter-Web-UI/blob/main/images/XML-to-RDF-using-DTD-screenshot.png?raw=true"/>
 ++++
 
 ---
@@ -68,38 +68,38 @@ Thereafter, the Streamlit application will be available at http://localhost:8501
 ==== Build the Docker image
 
 ```bash
-docker build -t xml-to-rdf-converter-web-ui:latest .
+docker build -t xml2rdf-converter-web-ui:latest .
 ```
 
 ==== Run the Docker image
 
 ```bash
-docker run -p 8501:8501 --name xml-to-rdf-converter-web-ui xml-to-rdf-converter-web-ui:latest
+docker run -p 8501:8501 --name xml2rdf-converter-web-ui xml2rdf-converter-web-ui:latest
 ```
 
 Thereafter, the application will be available at http://localhost:8501 in your browser if you are running Docker locally.
 
 === Docker image from Dockerhub
 
-The https://github.com/WSE-research/DTD2RDFConverter-Web-UI/releases[releases] of this tool are https://hub.docker.com/r/wseresearch/xml-to-rdf-converter-web-ui/tags[available as Docker images on Dockerhub].
+The https://github.com/WSE-research/XML2RDF-converter-Web-UI/releases[releases] of this tool are https://hub.docker.com/r/wseresearch/xml2rdf-converter-web-ui-web-ui/tags[available as Docker images on Dockerhub].
 
 ==== Pull the prepared Docker image
 
 ```bash
-docker pull wseresearch/xml-to-rdf-converter-web-ui:latest
+docker pull wseresearch/xml2rdf-converter-web-ui:latest
 ```
 
 ==== Run the prepared Docker image
 
 ```bash
-docker run -p 8501:8501 --name xml-to-rdf-converter-web-ui wseresearch/xml-to-rdf-converter-web-ui:latest
+docker run -p 8501:8501 --name xml2rdf-converter-web-ui wseresearch/xml2rdf-converter-web-ui:latest
 ```
 
 == Configuration
 
 The project already contains reasonable configurations.
 They are integrated into the application using the https://github.com/HBNetwork/python-decouple[Python Decouple] package.
-If you want to change the configuration parameters, then you might change the values in the https://github.com/WSE-research/DTD2RDFConverter-Web-UI/blob/main/.env[`.env`] file that is stored in this project.
+If you want to change the configuration parameters, then you might change the values in the https://github.com/WSE-research/XML2RDF-converter-Web-UI/blob/main/.env[`.env`] file that is stored in this project.
 
 == Contribute
 
