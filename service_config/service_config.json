@@ -3,6 +3,6 @@
         "mode": "dockerfile",
         "image": "wseresearch/xml2rdf-converter-web-ui",
         "tag": "latest",
-        "port": "40181:5000"
+        "port": "40181:8501"
     }]
 }
