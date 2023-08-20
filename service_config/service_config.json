@@ -1,7 +1,7 @@
 {
     "services": [{
         "mode": "dockerfile",
-        "image": "wseresearch/xml-to-rdf-converter-web-ui",
+        "image": "wseresearch/xml2rdf-converter-web-ui",
         "tag": "latest",
         "port": "40181:5000"
     }]
